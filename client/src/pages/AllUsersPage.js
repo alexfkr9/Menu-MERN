@@ -127,9 +127,9 @@ export const AllUsersPage = () => {
         <Grid container spacing={3}>
             <Grid item xs={6}>
             <table>
-                <tr>
+                <thead>
                     <th>Блюдо</th><th>Цена</th><th>Ед.изм</th>
-                </tr>           
+                </thead>           
                 
                 {menu.map(product => (
                 <tr>    

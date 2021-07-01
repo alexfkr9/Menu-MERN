@@ -6,7 +6,7 @@ export const UserMenuPage = () => {
         const [menu, setMenu] = useState([]);
         const [form, setForm] = useState({
                                     name: '',
-                                    quantity: ''
+                                    quantity: []
                                 })
             
 
@@ -43,7 +43,7 @@ export const UserMenuPage = () => {
 
     // Добавление пользователя
         async function CreateUser() {
-  
+  console.log("user");
             const response = await fetch("api/user", {
                 method: "POST",
                 headers: { "Accept": "application/json", "Content-Type": "application/json" },
@@ -51,7 +51,7 @@ export const UserMenuPage = () => {
                     name: form.name,                    
                     quantity: form.quantity                   
                 })
-            });
+            }); 
             if (response.ok === true) {
                 const user = await response.json();
                 console.log(user);
@@ -79,9 +79,11 @@ export const UserMenuPage = () => {
         // GetUsers();
 
 
-        const changeHandler = event => {
-            setForm({ ...form, [event.target.name]: event.target.value });
-            console.log(form);
+        const changeHandler = (event) => {
+            // setForm({  name: 'San',
+            //             quantity: event.target.value
+            //                     })
+            console.log(event.target.index2)
         }
 
 	// Условный рендеринг компонента
@@ -96,8 +98,13 @@ export const UserMenuPage = () => {
             <form className="userForm">
                 <input type="hidden" name="id" value="" />
                 <div className="form-group">
-                    <label htmlFor="name">Название:</label>
+                    <label htmlFor="name">Ваше Имя:</label>
                     <input className="form-control" name="name" value={form.name}
+                        onChange={changeHandler} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="dish">Название блюда:</label>
+                    <input className="form-control" name="dish" value={form.name}
                         onChange={changeHandler} />
                 </div>
                 <div className="form-group">
@@ -118,22 +125,34 @@ export const UserMenuPage = () => {
                 </div>
                 <div className="panel-body">
                     <button onClick={CreateUser} className="btn btn-sm btn-primary">Сохранить</button>
-                    <a id="reset" onClick="{reset}" className="btn btn-sm btn-primary">Сбросить</a>
+                    
                 </div>
             </form>
             <table>
-                {menu.map(product => (
+                <tr>
+                    <th>Блюдо</th><th>Цена</th><th>Ед.изм</th><th>Кол-во</th>
+                </tr>
+                <tbody>
+                {menu.map( (product, index) => (
                 <tr key = {product._id}>
                 <td>{product.name}</td>
                 <td>{product.age}</td>
                 <td>{product.measure}</td>
+                <td><input className="form-control"
+                            name="quantity"
+                            index2="index"
+                            value={form.quantity[{index}]}
+                            onChange={changeHandler}
+                    />
+                </td>
                 <td><button onClick={ () => {GetUser(product._id)} } data-id={product._id}
                             style={{cursor:'pointer', padding:'15px'}}
-                            >Изменить
+                            >Выбрать {index}
                     </button>
                 </td>                           
                 </tr>
                 ))}
+                </tbody>
             </table>
         </>
         );
