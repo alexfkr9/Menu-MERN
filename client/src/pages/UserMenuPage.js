@@ -4,10 +4,9 @@ export const UserMenuPage = () => {
         const [error, setError] = useState(null);
         const [isLoaded, setIsLoaded] = useState(false);       
         const [menu, setMenu] = useState([]);
-        const [form, setForm] = useState({
-                                    name: '',
-                                    quantity: []
-                                })
+        const [name, setName] = useState('');
+        const [quantity, setQuantity] = useState([]);
+        const [arr, setArr] = useState([]);
             
 
     useEffect(() => {
@@ -17,6 +16,7 @@ export const UserMenuPage = () => {
         (result) => {
           setIsLoaded(true);  
           setMenu(result);
+          setArr(Array.from({ length: result.length }, () => 0));
         },
         // Примечание: важно обрабатывать ошибки именно здесь, а не в блоке catch(),
         // чтобы не перехватывать исключения из ошибок в самих компонентах.
@@ -26,20 +26,7 @@ export const UserMenuPage = () => {
         }
       )
   }, [])	
-   
-
-	// Получение одного пользователя
-    async function GetUser(id) {
-        const response = await fetch("/api/menu/" + id, {
-            method: "GET",
-            headers: { "Accept": "application/json" }
-        });
-        if (response.ok === true) {
-            const user = await response.json();                
-            setForm(user);                
-            console.log("user"); console.log(user);                
-        }
-    };
+	
 
     // Добавление пользователя
         async function CreateUser() {
@@ -48,42 +35,26 @@ export const UserMenuPage = () => {
                 method: "POST",
                 headers: { "Accept": "application/json", "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    name: form.name,                    
-                    quantity: form.quantity                   
+                    name: name,                    
+                    quantity: quantity                   
                 })
             }); 
             if (response.ok === true) {
                 const user = await response.json();
-                console.log(user);
-                // reset();
-                // document.querySelector("tbody").append(row(user));
+                console.log(user);                
             }
+        }    
+
+        const getName = (event) => {
+            const n = event.target.value;
+            setName(n);
+            console.log(name);
         }
 
-    // отправка формы
-        // function submitForm() {
-        //       // e.preventDefault();              
-        //       const form = document.forms["userForm"];
-        //       console.log(form);
-        //       const id = form.elements["id"].value;
-        //       const name = form.elements["name"].value;
-        //       const age = form.elements["age"].value;
-        //       const quantity = form.elements["quantity"].value;
-        //       const measure = form.elements["measure"].value;
-        //       if (id == 0)
-        //           CreateUser(name, quantity);
-        //       // else
-        //       //     EditUser(id, name, age, measure);          
-        // }
-        // загрузка пользователей
-        // GetUsers();
-
-
-        const changeHandler = (event) => {
-            // setForm({  name: 'San',
-            //             quantity: event.target.value
-            //                     })
-            console.log(event.target.index2)
+        const changeHandler = (event) => {             
+            arr[event.target.id] = event.target.value;
+            setQuantity(arr);         
+            console.log(setQuantity);
         }
 
 	// Условный рендеринг компонента
@@ -99,30 +70,9 @@ export const UserMenuPage = () => {
                 <input type="hidden" name="id" value="" />
                 <div className="form-group">
                     <label htmlFor="name">Ваше Имя:</label>
-                    <input className="form-control" name="name" value={form.name}
-                        onChange={changeHandler} />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="dish">Название блюда:</label>
-                    <input className="form-control" name="dish" value={form.name}
-                        onChange={changeHandler} />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="cost">Цена:</label>
-                    <input className="form-control" name="cost" value={form.age} />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="quantity">Кол-во:</label>
-                    <input className="form-control"
-                            name="quantity"
-                            value={form.quantity}
-                            onChange={changeHandler}
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="measure">Ед.изм:</label>
-                    <input className="form-control" name="measure" value={form.measure} />
-                </div>
+                    <input className="form-control" name="name" value={name}
+                        onChange={getName} />
+                </div>                
                 <div className="panel-body">
                     <button onClick={CreateUser} className="btn btn-sm btn-primary">Сохранить</button>
                     
@@ -133,23 +83,17 @@ export const UserMenuPage = () => {
                     <th>Блюдо</th><th>Цена</th><th>Ед.изм</th><th>Кол-во</th>
                 </tr>
                 <tbody>
-                {menu.map( (product, index) => (
+                {menu.map( (product, id) => (
                 <tr key = {product._id}>
                 <td>{product.name}</td>
                 <td>{product.age}</td>
                 <td>{product.measure}</td>
                 <td><input className="form-control"
                             name="quantity"
-                            index2="index"
-                            value={form.quantity[{index}]}
+                            id={id}                            
                             onChange={changeHandler}
                     />
-                </td>
-                <td><button onClick={ () => {GetUser(product._id)} } data-id={product._id}
-                            style={{cursor:'pointer', padding:'15px'}}
-                            >Выбрать {index}
-                    </button>
-                </td>                           
+                </td>                                           
                 </tr>
                 ))}
                 </tbody>

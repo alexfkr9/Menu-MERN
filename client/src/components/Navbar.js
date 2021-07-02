@@ -1,5 +1,5 @@
 import React from 'react'
-import {NavLink} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 export const Navbar = () => {   
 
@@ -8,9 +8,9 @@ export const Navbar = () => {
       <div className="nav-wrapper blue darken-1" style={{ padding: '0 2rem' }}>
         <span className="brand-logo">Навигация</span>
         <ul id="nav-mobile" className="right hide-on-med-and-down">
-          <li><NavLink to="/">Все посетители</NavLink></li>
-          <li><NavLink to="/user">Создать заказ</NavLink></li>
-          <li><NavLink to="/create">Создать меню</NavLink></li>          
+          <li><Link to="/">Все посетители</Link></li>
+          <li><Link to="/user">Создать заказ</Link></li>
+          <li><Link to="/create">Создать меню</Link></li>          
         </ul>
       </div>
     </nav>
