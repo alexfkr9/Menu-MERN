@@ -80,11 +80,25 @@ export const AllUsersPage = () => {
             }
         }
 
-    
+    // Удаление пользователя
+        async function DeleteUser(id) {
+            // const response = await fetch("/api/user/" + id, {
+            //     method: "DELETE",
+            //     headers: { "Accept": "application/json" }
+            // });
+            // if (response.ok === true) {
+            //     const user = await response.json();
+            //     console.log("User id)")
+            // }
+            console.log("User id)"); console.log(id);
+        }
+
 
         const changeHandler = event => {
             setForm({ ...form, [event.target.name]: event.target.value });            
         }
+
+
 
 	// Условный рендеринг компонента
     if (error) {
@@ -119,8 +133,7 @@ export const AllUsersPage = () => {
                     <input className="form-control" name="measure" value={form.measure} />
                 </div>
                 <div className="panel-body">
-                    <button onClick={CreateUser} className="btn btn-sm btn-primary">Сохранить</button>
-                    <a id="reset" onClick="{reset}" className="btn btn-sm btn-primary">Сбросить</a>
+                    <button onClick={CreateUser} className="btn btn-sm btn-primary">Сохранить</button>                    
                 </div>
             </form>
 
@@ -147,14 +160,13 @@ export const AllUsersPage = () => {
                     {users.map(value => ( <th>{value.name}</th> ))} 
                 </tr>                
                                    
-                    {users.map(product => (
-                    <td>
-                                                
-                            {product.quantity.map(value => ( <tr style={{ height: 55 }}>                                                               
-                            {value} </tr>
-                            ))}
-                          
-                    </td>
+                    {users.map( (product) => (                      
+                        <td>                                                    
+                                {product.quantity.map(value => (                                     
+                                    <tr style={{ height: 55 }}>{value}</tr>                                    
+                                ))}
+                                <tr><button onClick={DeleteUser(product.id)}>Delete</button></tr>                                
+                        </td>                    
                     ))}
                                 
             </table>
