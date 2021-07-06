@@ -10,7 +10,7 @@ export const AllUsersPage = () => {
         const [form, setForm] = useState({
                                     name: '',
                                     quantity: ''
-                                })
+                                });      
             
 
     useEffect(() => {
@@ -82,23 +82,26 @@ export const AllUsersPage = () => {
 
     // Удаление пользователя
         async function DeleteUser(id) {
-            // const response = await fetch("/api/user/" + id, {
-            //     method: "DELETE",
-            //     headers: { "Accept": "application/json" }
-            // });
-            // if (response.ok === true) {
-            //     const user = await response.json();
-            //     console.log("User id)")
-            // }
+            const response = await fetch("/api/user/" + id, {
+                method: "DELETE",
+                headers: { "Accept": "application/json" }
+            });
+            if (response.ok === true) {
+                const user = await response.json();
+                console.log("User id)")
+            }
             console.log("User id)"); console.log(id);
         }
 
 
+        const DeleteHandler = event => {
+            
+            DeleteUser(event.target.id);
+        }
+
         const changeHandler = event => {
             setForm({ ...form, [event.target.name]: event.target.value });            
         }
-
-
 
 	// Условный рендеринг компонента
     if (error) {
@@ -165,7 +168,9 @@ export const AllUsersPage = () => {
                                 {product.quantity.map(value => (                                     
                                     <tr style={{ height: 55 }}>{value}</tr>                                    
                                 ))}
-                                <tr><button onClick={DeleteUser(product.id)}>Delete</button></tr>                                
+                                <tr>{product._id}</tr>
+
+                                <tr><button id ={product._id} onClick={DeleteHandler}>Delete</button></tr>                                
                         </td>                    
                     ))}
                                 
