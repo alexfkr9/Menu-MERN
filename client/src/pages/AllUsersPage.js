@@ -13,8 +13,13 @@ export const AllUsersPage = () => {
         const [form, setForm] = useState({
                                     name: '',
                                     quantity: ''
+<<<<<<< HEAD
                                 });
 
+=======
+                                });      
+            
+>>>>>>> e54b5a510ce10515e14c42a9f4cbd95e986f44f8
 
     useEffect(() => {
     fetch("/api/menu")
@@ -90,7 +95,11 @@ export const AllUsersPage = () => {
                 headers: { "Accept": "application/json" }
             });
             if (response.ok === true) {
+<<<<<<< HEAD
                 // const user = await response.json();
+=======
+                const user = await response.json();
+>>>>>>> e54b5a510ce10515e14c42a9f4cbd95e986f44f8
                 console.log("User id)")
             }
             console.log("User id)"); console.log(id);
@@ -106,7 +115,11 @@ export const AllUsersPage = () => {
             setForm({ ...form, [event.target.name]: event.target.value });            
         }
 
+<<<<<<< HEAD
     // Условный рендеринг компонента
+=======
+	// Условный рендеринг компонента
+>>>>>>> e54b5a510ce10515e14c42a9f4cbd95e986f44f8
     if (error) {
         return <div>Ошибка: {error.message}</div>;
     } else if (!isLoaded) {
@@ -174,12 +187,18 @@ export const AllUsersPage = () => {
                                 {product.quantity.map(value => (                                     
                                     <tr style={{ height: 55 }}>{value}</tr>                                    
                                 ))}
+<<<<<<< HEAD
                                 <tr><Button 
                                         variant="contained" color="secondary"
                                         id ={product._id}
                                         onClick={DeleteHandler}>
                                         Delete
                                     </Button></tr>                             
+=======
+                                <tr>{product._id}</tr>
+
+                                <tr><button id ={product._id} onClick={DeleteHandler}>Delete</button></tr>                                
+>>>>>>> e54b5a510ce10515e14c42a9f4cbd95e986f44f8
                         </td>                    
                     ))}
                 </tbody>                
