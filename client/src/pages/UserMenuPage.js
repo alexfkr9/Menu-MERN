@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react"
+
+import Table from '@material-ui/core/Table';
 	
 export const UserMenuPage = () => { 
         const [error, setError] = useState(null);
@@ -78,10 +80,12 @@ export const UserMenuPage = () => {
                     
                 </div>
             </form>
-            <table>
+            <Table>
+                <thead>
                 <tr>
                     <th>Блюдо</th><th>Цена</th><th>Ед.изм</th><th>Кол-во</th>
                 </tr>
+                </thead>
                 <tbody>
                 {menu.map( (product, id) => (
                 <tr key = {product._id}>
@@ -97,7 +101,7 @@ export const UserMenuPage = () => {
                 </tr>
                 ))}
                 </tbody>
-            </table>
+            </Table>
         </>
         );
   }

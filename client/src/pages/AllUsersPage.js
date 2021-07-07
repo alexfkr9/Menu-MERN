@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react"
 
 import Grid from '@material-ui/core/Grid';
-	
+
+import Button from '@material-ui/core/Button';
+
+    
 export const AllUsersPage = () => { 
         const [error, setError] = useState(null);
         const [isLoaded, setIsLoaded] = useState(false);       
@@ -10,8 +13,8 @@ export const AllUsersPage = () => {
         const [form, setForm] = useState({
                                     name: '',
                                     quantity: ''
-                                })
-            
+                                });
+
 
     useEffect(() => {
     fetch("/api/menu")
@@ -48,18 +51,18 @@ export const AllUsersPage = () => {
     }, []);
 
     
-	// Получение одного пользователя
-    async function GetUser(id) {
-        const response = await fetch("/api/menu/" + id, {
-            method: "GET",
-            headers: { "Accept": "application/json" }
-        });
-        if (response.ok === true) {
-            const user = await response.json();                
-            setForm(user);                
-            console.log("user"); console.log(user);                
-        }
-    };
+    // Получение одного пользователя
+    // async function GetUser(id) {
+    //     const response = await fetch("/api/menu/" + id, {
+    //         method: "GET",
+    //         headers: { "Accept": "application/json" }
+    //     });
+    //     if (response.ok === true) {
+    //         const user = await response.json();                
+    //         setForm(user);                
+    //         console.log("user"); console.log(user);                
+    //     }
+    // };
 
     // Добавление пользователя
         async function CreateUser() {
@@ -82,25 +85,28 @@ export const AllUsersPage = () => {
 
     // Удаление пользователя
         async function DeleteUser(id) {
-            // const response = await fetch("/api/user/" + id, {
-            //     method: "DELETE",
-            //     headers: { "Accept": "application/json" }
-            // });
-            // if (response.ok === true) {
-            //     const user = await response.json();
-            //     console.log("User id)")
-            // }
+            const response = await fetch("/api/user/" + id, {
+                method: "DELETE",
+                headers: { "Accept": "application/json" }
+            });
+            if (response.ok === true) {
+                // const user = await response.json();
+                console.log("User id)")
+            }
             console.log("User id)"); console.log(id);
         }
 
+
+        const DeleteHandler = event => {
+            
+            DeleteUser(event.target.id);
+        }
 
         const changeHandler = event => {
             setForm({ ...form, [event.target.name]: event.target.value });            
         }
 
-
-
-	// Условный рендеринг компонента
+    // Условный рендеринг компонента
     if (error) {
         return <div>Ошибка: {error.message}</div>;
     } else if (!isLoaded) {
@@ -143,32 +149,40 @@ export const AllUsersPage = () => {
                 <thead>
                     <th>Блюдо</th><th>Цена</th><th>Ед.изм</th>
                 </thead>           
-                
+                <tbody>
                 {menu.map(product => (
-                <tr>    
+                <tr key={menu._id}>    
                     <td>{product.name}</td>
                     <td>{product.age}</td>
                     <td>{product.measure}</td>
                  </tr>                                                                                 
-                ))}  
+                ))}
+                </tbody>  
             </table>           
             </Grid>
 
             <Grid item xs={6}>
             <table>
+                <thead>
                 <tr>
                     {users.map(value => ( <th>{value.name}</th> ))} 
                 </tr>                
-                                   
+                </thead>
+                <tbody>                   
                     {users.map( (product) => (                      
                         <td>                                                    
                                 {product.quantity.map(value => (                                     
                                     <tr style={{ height: 55 }}>{value}</tr>                                    
                                 ))}
-                                <tr><button onClick={DeleteUser(product.id)}>Delete</button></tr>                                
+                                <tr><Button 
+                                        variant="contained" color="secondary"
+                                        id ={product._id}
+                                        onClick={DeleteHandler}>
+                                        Delete
+                                    </Button></tr>                             
                         </td>                    
                     ))}
-                                
+                </tbody>                
             </table>
             </Grid>
 
