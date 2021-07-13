@@ -89,15 +89,15 @@ export const UserMenuPage = () => {
                 <tbody>
                 {menu.map( (product, id) => (
                 <tr key = {product._id}>
-                <td>{product.name}</td>
-                <td>{product.age}</td>
-                <td>{product.measure}</td>
-                <td><input className="form-control"
-                            name="quantity"
-                            id={id}                            
-                            onChange={changeHandler}
-                    />
-                </td>                                           
+                    <td>{product.name}</td>
+                    <td>{product.age}</td>
+                    <td>{product.measure}</td>
+                    <td><input className="form-control"
+                                name="quantity"
+                                id={id}                            
+                                onChange={changeHandler}
+                        />
+                    </td>                                           
                 </tr>
                 ))}
                 </tbody>

@@ -1,5 +1,7 @@
 import React from 'react'
 
+import {EditRowModelControlGrid} from './EditRowModelControlGrid'
+
 export const CreateMenuPage = () => {  
 
     // Получение меню
@@ -161,6 +163,8 @@ export const CreateMenuPage = () => {
         GetUsers();
 
   return (
+    <>
+    <EditRowModelControlGrid />
     <div className="row">
           <h5>Создать меню</h5>
     <form name="userForm">
@@ -187,7 +191,8 @@ export const CreateMenuPage = () => {
         <tbody>
         </tbody>
     </table>
-  </div>  
+  </div>
+  </>  
   )
 }
 

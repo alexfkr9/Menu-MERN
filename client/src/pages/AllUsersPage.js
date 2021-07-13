@@ -13,13 +13,8 @@ export const AllUsersPage = () => {
         const [form, setForm] = useState({
                                     name: '',
                                     quantity: ''
-<<<<<<< HEAD
-                                });
+        });            
 
-=======
-                                });      
-            
->>>>>>> e54b5a510ce10515e14c42a9f4cbd95e986f44f8
 
     useEffect(() => {
     fetch("/api/menu")
@@ -94,12 +89,10 @@ export const AllUsersPage = () => {
                 method: "DELETE",
                 headers: { "Accept": "application/json" }
             });
-            if (response.ok === true) {
-<<<<<<< HEAD
-                // const user = await response.json();
-=======
+            if (response.ok === true) {              
+
                 const user = await response.json();
->>>>>>> e54b5a510ce10515e14c42a9f4cbd95e986f44f8
+
                 console.log("User id)")
             }
             console.log("User id)"); console.log(id);
@@ -115,11 +108,9 @@ export const AllUsersPage = () => {
             setForm({ ...form, [event.target.name]: event.target.value });            
         }
 
-<<<<<<< HEAD
-    // Условный рендеринг компонента
-=======
+
 	// Условный рендеринг компонента
->>>>>>> e54b5a510ce10515e14c42a9f4cbd95e986f44f8
+
     if (error) {
         return <div>Ошибка: {error.message}</div>;
     } else if (!isLoaded) {
@@ -160,16 +151,19 @@ export const AllUsersPage = () => {
             <Grid item xs={6}>
             <table>
                 <thead>
+                    <tr>
                     <th>Блюдо</th><th>Цена</th><th>Ед.изм</th>
+                        </tr>
                 </thead>           
                 <tbody>
-                {menu.map(product => (
-                <tr key={menu._id}>    
-                    <td>{product.name}</td>
-                    <td>{product.age}</td>
-                    <td>{product.measure}</td>
-                 </tr>                                                                                 
-                ))}
+
+                    {menu.map(product => (
+                    <tr key={menu._id}>    
+                        <td>{product.name}</td>
+                        <td>{product.age}</td>
+                        <td>{product.measure}</td>
+                    </tr>                                                                                
+                    ))}
                 </tbody>  
             </table>           
             </Grid>
@@ -181,26 +175,22 @@ export const AllUsersPage = () => {
                     {users.map(value => ( <th>{value.name}</th> ))} 
                 </tr>                
                 </thead>
-                <tbody>                   
+                <tbody>
+                    <tr>                  
                     {users.map( (product) => (                      
                         <td>                                                    
                                 {product.quantity.map(value => (                                     
                                     <tr style={{ height: 55 }}>{value}</tr>                                    
                                 ))}
-<<<<<<< HEAD
                                 <tr><Button 
                                         variant="contained" color="secondary"
                                         id ={product._id}
                                         onClick={DeleteHandler}>
                                         Delete
-                                    </Button></tr>                             
-=======
-                                <tr>{product._id}</tr>
-
-                                <tr><button id ={product._id} onClick={DeleteHandler}>Delete</button></tr>                                
->>>>>>> e54b5a510ce10515e14c42a9f4cbd95e986f44f8
+                                    </Button></tr>                                
                         </td>                    
                     ))}
+                    </tr>
                 </tbody>                
             </table>
             </Grid>
