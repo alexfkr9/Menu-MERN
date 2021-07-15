@@ -1,7 +1,5 @@
 import React from 'react'
 
-import {EditRowModelControlGrid} from './EditRowModelControlGrid'
-
 export const CreateMenuPage = () => {  
 
     // Получение меню
@@ -20,7 +18,7 @@ export const CreateMenuPage = () => {
                 users.forEach(user => {
                     // добавляем полученные элементы в таблицу
                     rows.append(row(user));
-                });
+                });                
             }
         }
           // Получение одного пользователя
@@ -160,11 +158,10 @@ export const CreateMenuPage = () => {
                   EditUser(id, name, age, measure);          
         }
         // загрузка пользователей
-        GetUsers();
+        GetUsers();        
 
   return (
-    <>
-    <EditRowModelControlGrid />
+    <>    
     <div className="row">
           <h5>Создать меню</h5>
     <form name="userForm">

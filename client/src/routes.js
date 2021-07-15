@@ -5,6 +5,7 @@ import {AllUsersPage} from './pages/AllUsersPage'
 import {CreateMenuPage} from './pages/CreateMenuPage'
 import {UserMenuPage} from './pages/UserMenuPage'
 
+import CreateMenuPageMat from './pages/CreateMenuPageMat'
 
 export const useRoutes = isAuthenticated => {
 
@@ -23,7 +24,10 @@ export const useRoutes = isAuthenticated => {
         </Route>
         <Route path="/create" exact>
           <CreateMenuPage />
-        </Route>        
+        </Route>
+        <Route path="/create_mat" exact>
+          <CreateMenuPageMat />
+        </Route>       
         <Redirect to="/create" />
       </Switch>
     )

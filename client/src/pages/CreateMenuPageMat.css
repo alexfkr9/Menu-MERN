@@ -1,0 +1,11 @@
+.app {
+    margin: 2rem auto;
+    width: 90vw;
+}
+
+.app > h1 {
+    text-align: center;
+    color: white;
+    font-weight: bolder;
+    border-bottom: yellow 0.5px dashed;
+}
