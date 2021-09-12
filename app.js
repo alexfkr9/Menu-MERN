@@ -15,6 +15,14 @@ const menuScheme = new Schema({name: String, age: Number, measure: String}, {ver
 const Menu = mongoose.model("menu", menuScheme);
  
 app.use(express.static(__dirname + "/public"));
+
+
+  // app.use('/', express.static(path.join(__dirname, 'client', 'build')))
+
+  // app.get('*', (req, res) => {
+  //   res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+  // })
+
  
 mongoose.connect("mongodb+srv://san:master9@cluster0.uksn7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false }, function(err){
     if(err) return console.log(err);
@@ -146,4 +154,3 @@ app.put("/api/menu", jsonParser, function(req, res){
         res.send(menu);
     });
 });
-

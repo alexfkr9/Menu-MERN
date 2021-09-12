@@ -26,6 +26,10 @@
     "mongoose": "^5.8.1",
     "shortid": "^2.2.15"
   },
+  "engines": {
+    "node": ">=13.10.0",
+    "npm": ">=6.14.4"
+  },
   "devDependencies": {
     "concurrently": "^5.0.2",
     "cross-env": "^6.0.3",
