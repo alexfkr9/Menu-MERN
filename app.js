@@ -24,12 +24,16 @@ app.use(express.static(__dirname + "/public"));
   // })
 
  
-mongoose.connect("mongodb+srv://san:master9@cluster0.uksn7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false }, function(err){
-    if(err) return console.log(err);
-    app.listen(5000, function(){
+// mongoose.connect("mongodb+srv://san:master9@cluster0.uksn7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false }, function(err){
+//     if(err) return console.log(err);
+//     app.listen(5000, function(){
+//         console.log("Сервер ожидает подключения...");
+//     });
+// });
+
+app.listen(5000, function(){
         console.log("Сервер ожидает подключения...");
     });
-});
  
 
  // User ------------------------------------------------s--
