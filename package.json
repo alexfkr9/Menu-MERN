@@ -4,7 +4,7 @@
   "description": "Cafe Mern stack",
   "main": "app.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node app.js",    
+    "start": "cross-env NODE_ENV=production node app.js",
     "server": "nodemon app.js",
     "client": "npm run start --prefix client",
     "client:install": "npm install --prefix client",
@@ -19,6 +19,7 @@
   "license": "ISC",
   "dependencies": {
     "config": "^3.2.4",
+    "cross-env": "^6.0.3",
     "express": "^4.17.1",
     "express-validator": "^6.3.0",
     "jsonwebtoken": "^8.5.1",
@@ -31,7 +32,6 @@
   },
   "devDependencies": {
     "concurrently": "^5.0.2",
-    "cross-env": "^6.0.3",
     "nodemon": "^2.0.2"
   }
 }
