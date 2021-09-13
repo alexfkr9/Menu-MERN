@@ -4,8 +4,7 @@
   "description": "Cafe Mern stack",
   "main": "app.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node app.js",
-    // "heroku-postbuild": "cd client/src && npm install && npm run build",
+    "start": "cross-env NODE_ENV=production node app.js",    
     "server": "nodemon app.js",
     "client": "npm run start --prefix client",
     "client:install": "npm install --prefix client",
